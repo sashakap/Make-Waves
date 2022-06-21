@@ -1,4 +1,4 @@
-using FFTW, PlotlyJS
+using FFTW
 
 function makeSquareWave(numNodes, numCycles, height)
     wave = zeros(Int, numNodes)
@@ -68,5 +68,10 @@ function makeSawtoothWave(numNodes, numCycles, height)
 
     wave
 
+end
+
+function makeSineWave(frequency)
+    t = range(1, stop = 1024, length = 1024)/1024*2pi
+    return sin.(frequency.*t)
 end
 
