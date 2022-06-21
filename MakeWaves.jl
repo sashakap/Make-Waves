@@ -75,3 +75,8 @@ function makeSineWave(frequency)
     return sin.(frequency.*t)
 end
 
+function makeCosineWave(frequency)
+    t = range(1, stop = 1024, length = 1024)/1024*2pi
+    return cos.(frequency.*t)
+end
+
