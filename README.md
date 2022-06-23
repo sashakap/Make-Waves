@@ -1,2 +1,2 @@
 # Make Waves Julia Module
-### This program allows you to make a square, sine, cosine, sawtooth, or triangular wave with a given number of nodes in the wave, amplitude(height) of the wave, and number of cycles you want to see in the wave
+### This program allows you to make a square, sine, and cosine, sawtooth, or triangular wave with a given frequency, sampling rate, and number of seconds you want to see the signal for. By running ```makeSineWave()```, ```makeCosineWave()```, or ```makeSquareWave()```, you will get make a blink window containting a PlotlyJS plot of the signal(on the left) and its fourier transform(on the right)

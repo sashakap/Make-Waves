@@ -1,22 +1,38 @@
-using FFTW
+using FFTW, PlotlyJS
 
-function makeSquareWave(numNodes, numCycles, height)
-    wave = zeros(Int, numNodes)
-    bottom = -height
-    top = height
-    halfPoint = numNodes/numCycles/2
-    currNode = 1
-    for currNode in currNode:numNodes
-        if currNode%halfPoint == 0
-            if height == bottom
-                height = top
-            elseif height == top
-                height = bottom
-            end
+function makeSquareWave(frequency, samplingRate, seconds)
+    t = range(start = 0, stop = seconds, step = 1/samplingRate)
+    wave = (sin.(frequency*2pi*t))
+
+    for (i,j) in enumerate(t)
+        println(wave[i])
+        if(wave[i] < 0)
+            wave[i] = -1
+        elseif(wave[i] > 0)
+            wave[i] = 1
         end
-        wave[currNode] = height
     end
-    wave
+    p = plot(t, wave)
+
+    PlotlyJS.display_blink(p)
+end
+
+
+
+function makeSineWave(frequency, samplingRate, seconds)
+    t = range(start = 0, stop = seconds, step = 1/samplingRate)
+    wave = (sin.(frequency*2pi*t))
+
+    (t, wave)
+
+end
+
+function makeCosineWave(frequency, samplingRate, seconds)
+    t = range(start = 0, stop = seconds, step = 1/samplingRate)
+    wave = (cos.(frequency*2pi*t))
+
+    (t, wave)
+
 end
 
 function makeTriangleWave(numNodes, numCycles, height)
@@ -69,14 +85,3 @@ function makeSawtoothWave(numNodes, numCycles, height)
     wave
 
 end
-
-function makeSineWave(frequency)
-    t = range(1, stop = 1024, length = 1024)/1024*2pi
-    return sin.(frequency.*t)
-end
-
-function makeCosineWave(frequency)
-    t = range(1, stop = 1024, length = 1024)/1024*2pi
-    return cos.(frequency.*t)
-end
-
